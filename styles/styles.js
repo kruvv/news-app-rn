@@ -7,9 +7,11 @@ export const gStyle = StyleSheet.create({
 
   },
   title: {
-      fontSize: 20,
+      fontSize: 25,
       color: "#333",
       fontFamily: 'mt-bold',
-      textAlign: 'center'
+      textAlign: 'center',
+      marginTop: 20,
+      marginBottom: 20
   }
 });

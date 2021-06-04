@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  Image,
 } from "react-native";
 
 import { gStyle } from "../styles/styles";
@@ -15,15 +16,40 @@ export default function Main({ navigation }) {
   };
 
   const [news, setNews] = useState([
-    { name: "Google", anons: "Gogle!!!", full: "Google is cool!!!!!" },
-    { name: "Apple", anons: "Apple!!!", full: "Apple is cool!!!!!" },
-    { name: "Vk", anons: "Vk!!!", full: "Vk is cool!!!!!" },
+    {
+      name: "Google",
+      anons: "Gogle!!!",
+      full: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, est! Nulla cum optio numquam? Doloribus soluta ipsum, harum beatae dolor distinctio? Accusantium inventore commodi recusandae.",
+      key: "1",
+      img: "https://seoukraine.com.ua/wp-content/uploads/2020/12/5-6.jpg",
+    },
+    {
+      name: "Apple",
+      anons: "Apple!!!",
+      full: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam magnam alias, laudantium mollitia, quo sint earum corrupti consequuntur tempora minus repellendus sunt obcaecati. Aut delectus fugit facilis perspiciatis voluptas numquam?",
+      key: "2",
+      img: "https://s3-symbol-logo.tradingview.com/apple--600.png",
+    },
+    {
+      name: "Vk",
+      anons: "Vk!!!",
+      full: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, eos obcaecati adipisci dolores saepe delectus sit temporibus deleniti laudantium quod.",
+      key: "3",
+      img: "https://pbs.twimg.com/media/Ex3r-6ZWQAA3vCz.jpg",
+    },
   ]);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => loadScene(item)}>
-      <Text>{item.name}</Text>
-      <Text>{item.anons}</Text>
+    <TouchableOpacity  style={styles.item} onPress={() => loadScene(item)}>
+      <Image
+        source={{
+          width: "100%",
+          height: 200,
+          uri: item.img,
+        }}
+      />
+      <Text style={styles.title}>{item.name}</Text>
+      <Text style={styles.anons}>{item.anons}</Text>
     </TouchableOpacity>
   );
 
@@ -39,4 +65,26 @@ export default function Main({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  header: {
+    marginBottom: 30
+  }, item: {
+    width: "100%",
+    marginBottom: 30
+  },
+  title: {
+    fontFamily: "mt-bold",
+    fontSize: 22,
+    textAlign: "center",
+    marginTop: 20,
+    color: "#474747"
+  },
+  anons: {
+    fontFamily: "mt-light",
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 5,
+    color: "#474747"
+  }
+
+});
