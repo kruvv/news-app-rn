@@ -21,7 +21,7 @@ export default function Navigate() {
                 height: 100
               },
               headerTitleStyle: {
-                fontWeight: 'light'
+                fontWeight: "400"
               }
             }
           }

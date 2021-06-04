@@ -6,9 +6,12 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
+  Modal,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import { gStyle } from "../styles/styles";
+import { set } from "react-native-reanimated";
 
 export default function Main({ navigation }) {
   const loadScene = (item) => {
@@ -40,11 +43,10 @@ export default function Main({ navigation }) {
   ]);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity  style={styles.item} onPress={() => loadScene(item)}>
+    <TouchableOpacity style={styles.item} onPress={() => loadScene(item)}>
       <Image
+        style={styles.image}
         source={{
-          width: "100%",
-          height: 200,
           uri: item.img,
         }}
       />
@@ -53,13 +55,43 @@ export default function Main({ navigation }) {
     </TouchableOpacity>
   );
 
+  const [modalWindow, setModalWindow] = useState(false);
+
+
+  const openModal = () => {
+    setModalWindow(true);
+  };
+
+  const closeModal = () => {
+    setModalWindow(false);
+  };
+
   return (
     <View style={gStyle.main}>
+      <Modal visible={modalWindow}>
+        <View style={gStyle.main}>
+          <Ionicons
+            name="close-circle-sharp"
+            size={40}
+            color="red"
+            style={styles.iconClose}
+            onPress={closeModal}
+          />
+          <Text style={gStyle.title}>Добавить новую статью</Text>
+        </View>
+      </Modal>
+      <Ionicons
+        name="add-circle-sharp"
+        size={40}
+        color="green"
+        style={styles.iconAdd}
+        onPress={openModal}
+      />
       <Text style={gStyle.title}>Главная страница</Text>
       <FlatList
         data={news}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.key}
       />
     </View>
   );
@@ -67,24 +99,35 @@ export default function Main({ navigation }) {
 
 const styles = StyleSheet.create({
   header: {
-    marginBottom: 30
-  }, item: {
+    marginBottom: 30,
+  },
+  item: {
     width: "100%",
-    marginBottom: 30
+    marginBottom: 30,
   },
   title: {
     fontFamily: "mt-bold",
     fontSize: 22,
     textAlign: "center",
     marginTop: 20,
-    color: "#474747"
+    color: "#474747",
   },
   anons: {
     fontFamily: "mt-light",
     fontSize: 16,
     textAlign: "center",
     marginTop: 5,
-    color: "#474747"
-  }
-
+    color: "#474747",
+  },
+  image: {
+    width: "100%",
+    height: 200,
+  },
+  iconAdd: {
+    textAlign: "right",
+    marginBottom: 15,
+  },
+  iconClose: {
+    textAlign: "right",
+  },
 });
