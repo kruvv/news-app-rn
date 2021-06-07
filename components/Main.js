@@ -12,6 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { gStyle } from "../styles/styles";
 import { set } from "react-native-reanimated";
+import Form from "./Form";
 
 export default function Main({ navigation }) {
   const loadScene = (item) => {
@@ -57,12 +58,20 @@ export default function Main({ navigation }) {
 
   const [modalWindow, setModalWindow] = useState(false);
 
-
   const openModal = () => {
     setModalWindow(true);
   };
 
   const closeModal = () => {
+    setModalWindow(false);
+  };
+
+  const addArticle = (article) => {
+    setNews((list) => {
+      arguments.key = String(new Date().getTime());
+      console.log("key", arguments.key);
+      return [article, ...list];
+    });
     setModalWindow(false);
   };
 
@@ -78,6 +87,7 @@ export default function Main({ navigation }) {
             onPress={closeModal}
           />
           <Text style={gStyle.title}>Добавить новую статью</Text>
+          <Form addArticle={addArticle} />
         </View>
       </Modal>
       <Ionicons

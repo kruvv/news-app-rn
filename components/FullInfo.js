@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 
 import { gStyle } from "../styles/styles";
@@ -7,14 +7,23 @@ export default function FullInfo(/* { navigation } */ { route }) {
   /* const loadScene = () => {
     navigation.goBack();
   }; */
+
+  console.log("!", route.params.img)
   return (
     <View style={gStyle.main}>
-      <Image
-        style={styles.image}
-        source={{
-          uri: route.params.img,
-        }}
-      />
+      {route.params.img !== "" ? (
+        <Image
+          style={styles.image}
+          source={{
+            uri: route.params.img,
+          }}
+        />
+      ) : (
+        <Image
+          style={styles.image}
+          source={require("../assets/empty-img.png")}
+        />
+      )}
       <Text style={[gStyle.title, styles.header]}>{route.params.name}</Text>
       <Text style={styles.full}>{route.params.full}</Text>
       {/* <Button title="На главную" onPress={loadScene} /> */}
